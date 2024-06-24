@@ -1,0 +1,43 @@
+---
+title: "Household Income Differences by US Region in 2022"
+output: html_document
+excute:
+  echo: false
+---
+
+```{r setup, include=FALSE}
+# Load necessary libraries
+library(tidyverse)
+
+# Load the dataset
+data <- read_csv("RealEstateUS.CSV")
+```
+
+```{r}
+# Filter the data for the year 2022 and exclude 'United States' as a region
+data_2022 <- data %>% 
+  filter(Year == 2022 & Region != "United States")
+
+# Group the data by region and calculate mean of median and mean incomes
+income_data <- data_2022 %>%
+  group_by(Region) %>%
+  summarise(
+    Median = mean(`Median Income - Current Dollars`, na.rm = TRUE),
+    Mean = mean(`Mean Income - Current Dollars`, na.rm = TRUE)
+  )
+```
+
+```{r}
+# Melt the data for plotting
+income_data_long <- income_data %>%
+  pivot_longer(cols = c(Median, Mean), names_to = "Income_Type", values_to = "Income")
+
+# Create the bar plot
+ggplot(income_data_long, aes(x = Region, y = Income, fill = Income_Type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Household Income Differences by US Region in 2022", x = "US Region", y = "Income", fill = "Income Type") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
