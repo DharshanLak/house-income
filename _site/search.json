@@ -1,16 +1,16 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "[Kane’s Free Data Science Bootcamp] https://bootcamp.davidkane.info/\nMy name is Dharshan Lakshmikanthan. My email is kingdharshan2014@gmail.com. My GitHub repo is https://github.com/DharshanLak/house-income ."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Household Income Differences by US Region in 2022",
     "section": "",
     "text": "# Filter the data for the year 2022 and exclude 'United States' as a region\ndata_2022 &lt;- data %&gt;% \n  filter(Year == 2022 & Region != \"United States\")\n\n# Group the data by region and calculate mean of median and mean incomes\nincome_data &lt;- data_2022 %&gt;%\n  group_by(Region) %&gt;%\n  summarise(\n    Median = mean(`Median Income - Current Dollars`, na.rm = TRUE),\n    Mean = mean(`Mean Income - Current Dollars`, na.rm = TRUE)\n  )\n\n\n# Melt the data for plotting\nincome_data_long &lt;- income_data %&gt;%\n  pivot_longer(cols = c(Median, Mean), names_to = \"Income_Type\", values_to = \"Income\")\n\n# Create the bar plot\nggplot(income_data_long, aes(x = Region, y = Income, fill = Income_Type)) +\n  geom_bar(stat = \"identity\", position = \"dodge\") +\n  labs(title = \"Household Income Differences by US Region in 2022\", x = \"US Region\", y = \"Income\", fill = \"Income Type\") +\n  theme_minimal() +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "My name is Dharshan Lakshmikanthan. I made this project to help identify house income during the year 2022."
   }
 ]

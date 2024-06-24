@@ -40,4 +40,4 @@ ggplot(income_data_long, aes(x = Region, y = Income, fill = Income_Type)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-
+House income in the US increased a lot during 2022. The data shown was pulled from the tidyverse package. Then, the mapping data was used to visualize the differences in house income from the mean and median in the US. 2022 had the highest mean at $115,000 and median at $76,000 on the west side of the US 
