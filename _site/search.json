@@ -2,15 +2,36 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "About Me",
     "section": "",
-    "text": "[Kane’s Free Data Science Bootcamp] https://bootcamp.davidkane.info/\nMy name is Dharshan Lakshmikanthan. My email is kingdharshan2014@gmail.com. My GitHub repo is https://github.com/DharshanLak/house-income ."
+    "text": "My name is Dharshan Lakshmikanthan and I’m a upcoming senior at Mountain House High School. My email is kingdharshan2014@gmail.com.\nGitHub Repo\nKane’s Free Data Science Bootcamp"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
+    "title": "Household Income Differences by US Region",
+    "section": "",
+    "text": "This is a overall graph that gives an idea of which region has the highest house income and what month it occurs in!"
+  },
+  {
+    "objectID": "index.knit.html",
+    "href": "index.knit.html",
     "title": "Household Income Differences by US Region in 2022",
     "section": "",
-    "text": "# Filter the data for the year 2022 and exclude 'United States' as a region\ndata_2022 &lt;- data %&gt;% \n  filter(Year == 2022 & Region != \"United States\")\n\n# Group the data by region and calculate mean of median and mean incomes\nincome_data &lt;- data_2022 %&gt;%\n  group_by(Region) %&gt;%\n  summarise(\n    Median = mean(`Median Income - Current Dollars`, na.rm = TRUE),\n    Mean = mean(`Mean Income - Current Dollars`, na.rm = TRUE)\n  )\n\n\n# Melt the data for plotting\nincome_data_long &lt;- income_data %&gt;%\n  pivot_longer(cols = c(Median, Mean), names_to = \"Income_Type\", values_to = \"Income\")\n\n# Create the bar plot\nggplot(income_data_long, aes(x = Region, y = Income, fill = Income_Type)) +\n  geom_bar(stat = \"identity\", position = \"dodge\") +\n  labs(title = \"Household Income Differences by US Region in 2022\", x = \"US Region\", y = \"Income\", fill = \"Income Type\") +\n  theme_minimal() +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))"
+    "text": "# Load necessary libraries\nlibrary(ggplot2)\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n# Load the data\ndata &lt;- read.csv('RealEstateUS.CSV')\n\n\n# Filter out the United States region\ndata &lt;- data %&gt;% filter(Region != 'United States')\n\n# Ensure 'Month' is treated as a factor with the correct order\ndata$Month &lt;- factor(data$Month, levels = c(\"January\", \"February\", \"March\", \"April\", \"May\", \"June\", \"July\", \"August\", \"September\", \"October\", \"November\", \"December\"))\n\n# Create a plot for each year from 2019 to 2023\nyears &lt;- 2019:2023\nfor (year in years) {\n  year_data &lt;- data %&gt;% filter(Year == year)\n  \n  p &lt;- ggplot(year_data, aes(x = Month, y = Average.Sales.Price, fill = Region)) +\n    geom_bar(stat = 'identity', position = 'dodge') +\n    labs(title = paste('Average Sales Price in', year), x = 'Month', y = 'Average Sales Price') +\n    theme_minimal() +\n    theme(axis.text.x = element_text(angle = 45, hjust = 1))\n  \n  # Save the plot\n  ggsave(paste0('Average_Sales_Price_', year, '.png'), plot = p, width = 10, height = 6)\n}"
+  },
+  {
+    "objectID": "2023.html",
+    "href": "2023.html",
+    "title": "2023",
+    "section": "",
+    "text": "This graph is bugged!"
+  },
+  {
+    "objectID": "2023.html#average-sales-price-in-2023",
+    "href": "2023.html#average-sales-price-in-2023",
+    "title": "2023",
+    "section": "",
+    "text": "This graph is bugged!"
   }
 ]

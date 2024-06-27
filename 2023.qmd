@@ -1,0 +1,9 @@
+---
+title: "2023"
+---
+
+## Average Sales Price in 2023
+
+![](Average_Sales_Price_2023.png)
+
+This graph is bugged!

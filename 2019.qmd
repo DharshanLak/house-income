@@ -1,0 +1,7 @@
+---
+title: "2019"
+---
+
+## Average Sales Price in 2019
+
+![](Average_Sales_Price_2019.png)

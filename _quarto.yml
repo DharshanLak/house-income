@@ -2,12 +2,22 @@ project:
   type: website
 
 website:
-  title: "House Income Differences by US Region in 2022"
+  title: "House Income Prices"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - text: "2019"
+        href: 2019.qmd
+      - text: "2020"
+        href: 2020.qmd
+      - text: "2021"
+        href: 2021.qmd
+      - text: "2022"
+        href: 2022.qmd
+      - text: "2023"
+        href: 2023.qmd
 
 format:
   html:

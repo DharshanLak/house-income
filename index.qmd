@@ -1,43 +1,67 @@
 ---
-title: "Household Income Differences by US Region in 2022"
+title: "Household Income Differences by US Region"
 output: html_document
-excute:
-  echo: false
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, echo=FALSE}
 # Load necessary libraries
+library(ggplot2)
+library(dplyr)
 library(tidyverse)
+library(tidycensus)
 
-# Load the dataset
-data <- read_csv("RealEstateUS.CSV")
+# Load the data
+data <- read.csv('RealEstateUS.CSV')
 ```
 
-```{r}
-# Filter the data for the year 2022 and exclude 'United States' as a region
-data_2022 <- data %>% 
-  filter(Year == 2022 & Region != "United States")
+```{r, echo=FALSE}
+# Filter out the United States region
+data <- data %>% filter(Region != 'United States')
 
-# Group the data by region and calculate mean of median and mean incomes
-income_data <- data_2022 %>%
-  group_by(Region) %>%
-  summarise(
-    Median = mean(`Median Income - Current Dollars`, na.rm = TRUE),
-    Mean = mean(`Mean Income - Current Dollars`, na.rm = TRUE)
-  )
+# Ensure 'Month' is treated as a factor with the correct order
+data$Month <- factor(data$Month, levels = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"))
+
+# Create a plot for each year from 2019 to 2023
+years <- 2019:2023
+for (year in years) {
+  year_data <- data %>% filter(Year == year)
+  
+  p <- ggplot(year_data, aes(x = Month, y = Average.Sales.Price, fill = Region)) +
+    geom_bar(stat = 'identity', position = 'dodge') +
+    labs(title = paste('Average Sales Price in', year), x = 'Month', y = 'Average Sales Price') +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
+  # Save the plot
+  ggsave(paste0('Average_Sales_Price_', year, '.png'), plot = p, width = 10, height = 6)
+}
+
 ```
 
-```{r}
-# Melt the data for plotting
-income_data_long <- income_data %>%
-  pivot_longer(cols = c(Median, Mean), names_to = "Income_Type", values_to = "Income")
+```{r, echo=FALSE}
+# Filter out the United States region
+data_filtered <- data %>% 
+  filter(Region != 'United States')
 
-# Create the bar plot
-ggplot(income_data_long, aes(x = Region, y = Income, fill = Income_Type)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Household Income Differences by US Region in 2022", x = "US Region", y = "Income", fill = "Income Type") +
+# Ensure 'Month' is treated as a factor with the correct order
+data_filtered$Month <- factor(data_filtered$Month, levels = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"))
+
+# Aggregate data across all years
+combined_data <- data_filtered %>% 
+  group_by(Region, Month) %>% 
+  summarise(Average_Sales_Price = mean(Average.Sales.Price), .groups = 'drop')
+
+# Plot combined data
+p <- ggplot(combined_data, aes(x = Month, y = Average_Sales_Price, fill = Region)) +
+  geom_bar(stat = 'identity', position = 'dodge') +
+  labs(title = 'Average Sales Price (2019-2023)', x = 'Month', y = 'Average Sales Price') +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_discrete(name = "Region")
+
+# Display the plot
+print(p)
 ```
 
-House income in the US increased a lot during 2022. The data shown was pulled from the tidyverse package. Then, the mapping data was used to visualize the differences in house income from the mean and median in the US. 2022 had the highest mean at $115,000 and median at $76,000 on the west side of the US 
+
+This is a overall graph that gives an idea of which region has the highest house income and what month it occurs in! I made this graph using data I found online as well as the tidyverse package. On this graph, it appears that the West region has the highest average house income than the other regions.

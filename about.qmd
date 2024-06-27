@@ -1,8 +1,11 @@
 ---
-title: "About"
+title: "About Me"
 ---
 
-[Kane's Free Data Science Bootcamp] https://bootcamp.davidkane.info/ 
+My name is Dharshan Lakshmikanthan and I'm a upcoming senior at Mountain House High School. My email is kingdharshan2014@gmail.com. 
 
-My name is Dharshan Lakshmikanthan. My email is kingdharshan2014@gmail.com. My GitHub repo is https://github.com/DharshanLak/house-income .
+
+[GitHub Repo](https://github.com/DharshanLak/house-income)
+
+[Kane's Free Data Science Bootcamp](https://bootcamp.davidkane.info/)
 

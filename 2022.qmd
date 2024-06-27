@@ -1,0 +1,7 @@
+---
+title: "2022"
+---
+
+## Average Sales Price in 2022
+
+![](Average_Sales_Price_2022.png)
