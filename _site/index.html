@@ -94,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./2019.html"> 
@@ -161,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>This is a overall graph that gives an idea of which region has the highest house income and what month it occurs in!</p>
+<p>This is a overall graph that gives an idea of which region has the highest house income and what month it occurs in! I made this graph using data I found online as well as the tidyverse package. On this graph, it appears that the West region has the highest average house income than the other regions.</p>
 
 
 
@@ -247,7 +247,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/dharshanlak\.quarto\.pub\/house-income-differences-by-us-region-in-2022");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
